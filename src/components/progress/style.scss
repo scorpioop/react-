@@ -1,0 +1,53 @@
+.progress{
+  .progress-background{
+    position: relative;
+    height: 15px;
+    width: 200px;
+    background-color: $blue;
+    border-radius: 5px;
+    .progress-percent{
+      position: absolute;
+      border-radius: 5px;
+      top: 0;
+      left: 0;
+      height: inherit;
+      .progress-percent-num{
+        font-size: 0.8rem;
+        color: $white;
+        text-align: center;
+        line-height: 15px;
+      }
+    }
+    
+  }
+  
+}
+@each $key, $val in $theme-colors {
+  .process-#{$key} {
+    background-color: $val;
+  }
+  
+}
+.drag-block{
+  background-color: $gray-300;
+  width: 500px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $gray-600;
+  >div{
+    height: 80px;
+    text-align: center;
+  }
+  
+}
+.drag-in{
+  border: 2px solid $primary;
+  background-color: $blue
+}
+.upload-child{
+  &:hover{
+    cursor: pointer;
+  }
+}

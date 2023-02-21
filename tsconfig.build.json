@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "ESNext",
+    "target": "ES5",
+    "declaration": true,
+    "jsx": "react",
+    "allowSyntheticDefaultImports":true,
+    "moduleResolution":"node"
+
+  },
+  "include": ["src"],
+  "exclude": [
+    "src/components/**/*.test.tsx",
+    "src/components/**/*.stories.tsx",
+    "src/setupTests.ts",
+  ]
+}

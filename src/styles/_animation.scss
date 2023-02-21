@@ -1,0 +1,11 @@
+
+@include animition("top",center top);
+
+
+@include animition("left",center left,scaleX(0),scaleX(1));
+
+
+@include animition("bottom",center bottom,);
+
+
+@include animition("right",center right,scaleX(0),scaleX(1))
