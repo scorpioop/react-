@@ -11,7 +11,7 @@ export default InputMeta
 
 const Template:ComponentStory<typeof Input> = (args) => {
   return(
-    <Input placeholder="请输入...." {...args } />
+    <Input placeholder="请输入...." { ...args } />
   )
 }
 
