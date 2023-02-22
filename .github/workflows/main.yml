@@ -1,4 +1,4 @@
-name: simonsay
+name: react-component-simonsay
 on: # 指定触发workflow的条件，这里是指定了每push一次到main分支，则触发一次
   push:
     branches:
@@ -23,4 +23,6 @@ jobs:  # workflows文件主体，可以指定一个或者多个，这里指定�
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4 # 执行一些公开的action
       with:
-        folder: storybook-static
+        FOLDER: docs-build
+        CLEAN: true
+        TARGET_FOLDER: docs
