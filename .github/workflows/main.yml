@@ -23,7 +23,7 @@ jobs:  # workflows文件主体，可以指定一个或者多个，这里指定�
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4 # 执行一些公开的action
       with:
-        FOLDER: docs-build
+        FOLDER: storybook-static
         CLEAN: true
-        TARGET_FOLDER: docs
-        Branch: main
+        
+        
