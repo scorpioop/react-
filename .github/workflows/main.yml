@@ -25,4 +25,5 @@ jobs:  # workflows文件主体，可以指定一个或者多个，这里指定�
       with:
         FOLDER: docs-build
         CLEAN: true
+        BRANCH: main
         TARGET_FOLDER: docs

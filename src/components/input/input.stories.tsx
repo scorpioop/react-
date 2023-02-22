@@ -9,7 +9,7 @@ const InputMeta:ComponentMeta<typeof Input> = {
 
 export default InputMeta
 
-const Template:ComponentStory<typeof Input> = (args) => {
+const Template:ComponentStory<typeof Input> = ( args ) => {
   return(
     <Input placeholder="请输入...." { ...args } />
   )
