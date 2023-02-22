@@ -21,7 +21,7 @@ export const WithIcon = Template.bind({})
 WithIcon.args = {
   icon:"coffee"
 }
-WithIcon.storyName="带图标的Input"
+WithIcon.storyName= "带图标的Input"
 
 export const Withpend = Template.bind({})
 Withpend.args = {
