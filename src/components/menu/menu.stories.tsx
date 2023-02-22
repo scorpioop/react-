@@ -22,7 +22,7 @@ const Template: ComponentStory<typeof Menu> = (args) => {
       </SubMenu>
       <MenuItem disable>title 4</MenuItem>
       <SubMenu title="title 5">
-        <MenuItem>sub3</MenuItem>
+        <MenuItem>sub3 </MenuItem>
       </SubMenu>
     </Menu>
   )

@@ -22,11 +22,11 @@ export const Input:React.FC<Inputprops> =(props)=>{
   return(
     <div className={classes} style={style}>
       {propand?<div className="propand">{propand}</div>:null}
-    <div className="all-input" >
+    <div className="all-input">
     <input disabled={disable} className={inputClasses} {...restProps}/>
     <span className="input-icon">{icon?<Icon icon={icon} theme="primary"/>:null}</span>
     </div>
-      {append ? <div className="append" >{ append }</div> : null}
+      {append ? <div className="append">{ append }</div> : null}
     </div>
     
   )
