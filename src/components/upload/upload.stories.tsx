@@ -23,9 +23,9 @@ const Template:ComponentStory<typeof Upload> = (args) =>{
 export const Default = Template.bind({})
 Default.args={
   action:"https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  onProcess:action("process"),
-  onSuccess:action("success"),
-  onFail:action("fail"),
+  // onProcess:action("process"),
+  // onSuccess:action("success"),
+  // onFail:action("fail"),
   onBeforeUpload:undefined
 }
 const before=(file:File)=>{

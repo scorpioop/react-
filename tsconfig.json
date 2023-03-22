@@ -6,6 +6,7 @@
       "dom.iterable",
       "esnext"
     ],
+    "outDir": "dist",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -18,9 +19,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "declaration": true,
   },
   "include": [
     "src"
+, "src/rem.js"  ],
+  "exclude": [
+    "src/components/**/*.test.tsx",
+    "src/components/**/*.stories.tsx",
+    "src/setupTests.ts",
   ]
 }

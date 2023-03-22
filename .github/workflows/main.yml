@@ -13,7 +13,7 @@ jobs:  # workflows文件主体，可以指定一个或者多个，这里指定�
       uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
       with:
         persist-credentials: false
-    - name: installNode
+    - name: installNode   # 下载nodejs
       uses: actions/setup-node@v3
       with:
         node-version: '16'
@@ -21,8 +21,8 @@ jobs:  # workflows文件主体，可以指定一个或者多个，这里指定�
       run:  npm install && npm run build-storybook # 该步骤要运行的命令，这里就是部署react 的命令
       
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@v4 # 执行一些公开的action
-      with:
+      uses: JamesIves/github-pages-deploy-action@v4 # 执行一些公开的action， 这里包含部署到git pages上所需要的命令
+      with:       # 不设置branch会默认将要部署的内容存于gh—pages branch Defaults to gh-pages.
         FOLDER: storybook-static
         CLEAN: true
         

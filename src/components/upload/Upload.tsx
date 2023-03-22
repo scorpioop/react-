@@ -10,12 +10,12 @@ export interface UploadProps {
   onFail?: (err: any, file: File) => void;
   onBeforeUpload?: (file: File) => boolean | Promise<File>;
   onChange?: (file: File) => void;
-  onRemove?:(file:UploadStateProps)=>void,
-  defaultFile?:UploadStateProps[],
-  accept?:string,
-  multiple?:boolean,
-  children?:React.ReactNode,
-  drag:boolean,
+  onRemove?: (file: UploadStateProps) => void;
+  defaultFile?: UploadStateProps[];
+  accept?: string;
+  multiple?: boolean;
+  children?: React.ReactNode;
+  drag: boolean;
 }
 export type fileStatus = "ready" | "uploading" | "success" | "error";
 export interface UploadStateProps {
@@ -27,15 +27,26 @@ export interface UploadStateProps {
   raw?: File;
   response?: any;
   err?: any;
-  
 }
 export const Upload: React.FC<UploadProps> = (props) => {
-  const { drag,children,action, onProcess, onSuccess, onFail, onBeforeUpload, onChange,onRemove, defaultFile,accept,multiple} =
-    props;
+  const {
+    drag,
+    children,
+    action,
+    onProcess,
+    onSuccess,
+    onFail,
+    onBeforeUpload,
+    onChange,
+    onRemove,
+    defaultFile,
+    accept,
+    multiple,
+  } = props;
   const [filesStatusArray, setFilesStatusArray] = useState<UploadStateProps[]>(
     []
   );
-  const [defaultFiles,setDefaultFiles] = useState(defaultFile)
+  const [defaultFiles, setDefaultFiles] = useState(defaultFile);
   const inputNode = useRef<HTMLInputElement>(null);
   const handleClick = () => {
     if (!inputNode.current) return;
@@ -43,21 +54,23 @@ export const Upload: React.FC<UploadProps> = (props) => {
   };
   // useEffect(()=>{
   //   console.log(filesStatusArray);
-    
-  // },[filesStatusArray])
-  const updateFileList = (fileStatus:UploadStateProps,updateContent:Object)=>{
-    setFilesStatusArray((pre)=>{
-      let newNeed=pre.map(value=>{
-        if(value.uid===fileStatus.uid){
-          let temp = {...value,...updateContent}
-          return temp
-        }
-        return value
-      })
-      return newNeed
-    })
 
-  }
+  // },[filesStatusArray])
+  const updateFileList = (
+    fileStatus: UploadStateProps,
+    updateContent: Object
+  ) => {
+    setFilesStatusArray((pre) => {
+      let newNeed = pre.map((value) => {
+        if (value.uid === fileStatus.uid) {
+          let temp = { ...value, ...updateContent };
+          return temp;
+        }
+        return value;
+      });
+      return newNeed;
+    });
+  };
   const post = (file: File) => {
     const dataForm = new FormData();
     dataForm.append(file.name, file);
@@ -66,11 +79,11 @@ export const Upload: React.FC<UploadProps> = (props) => {
       size: file.size,
       name: file.name,
       status: "ready",
-      raw:file,
+      raw: file,
       percent: 0,
-    } as UploadStateProps
-    setFilesStatusArray((pre)=>{
-      return([__file, ...pre])
+    } as UploadStateProps;
+    setFilesStatusArray((pre) => {
+      return [__file, ...pre];
     });
     axios
       .post(action, dataForm, {
@@ -79,7 +92,10 @@ export const Upload: React.FC<UploadProps> = (props) => {
           let percentage =
             Math.round((e.loaded * 100) / (e.total ? e.total : 100)) || 0;
           if (percentage < 100) {
-            updateFileList(__file, { percent: percentage, status: "uploading" });
+            updateFileList(__file, {
+              percent: percentage,
+              status: "uploading",
+            });
             if (onProcess) {
               onProcess(percentage, file);
             }
@@ -88,13 +104,17 @@ export const Upload: React.FC<UploadProps> = (props) => {
       })
       .then((res: any) => {
         if (onChange) onChange(file);
-        updateFileList(__file, { percent: 100, status: "success",response:res });
+        updateFileList(__file, {
+          percent: 100,
+          status: "success",
+          response: res,
+        });
         if (onSuccess) onSuccess(res, file);
       })
       .catch((err) => {
         if (onChange) onChange(file);
         if (onFail) onFail(err, file);
-        updateFileList(__file, { percent: 100, status: "error",err:err });
+        updateFileList(__file, { percent: 100, status: "error", err: err });
       });
   };
   const uploadFiles = (files: FileList) => {
@@ -108,10 +128,10 @@ export const Upload: React.FC<UploadProps> = (props) => {
           });
         } else if (temp) {
           post(file);
-        } else if(temp===false){
+        } else if (temp === false) {
           alert("fail");
-        } else{
-          post(file)
+        } else {
+          post(file);
         }
       } else {
         post(file);
@@ -119,53 +139,58 @@ export const Upload: React.FC<UploadProps> = (props) => {
     });
   };
 
-  const handleFileSelect = (files:FileList) => {
-    
+  const handleFileSelect = (files: FileList) => {
     if (!files) return;
     uploadFiles(files);
     if (inputNode.current) {
-      inputNode.current.value = ''
+      inputNode.current.value = "";
     }
   };
-  const handleRemove = (fileStatus:UploadStateProps)=>{
-    if(defaultFiles){
-      let temp = defaultFiles.filter((val)=>{
-        return val.uid!==fileStatus.uid
-      })
-      setDefaultFiles([...temp])
+  const handleRemove = (fileStatus: UploadStateProps) => {
+    if (defaultFiles) {
+      let temp = defaultFiles.filter((val) => {
+        return val.uid !== fileStatus.uid;
+      });
+      setDefaultFiles([...temp]);
     }
-    if(filesStatusArray){
-      let temp=filesStatusArray.filter((val)=>{
-        return val.uid!==fileStatus.uid
-      })
-      setFilesStatusArray([...temp])
+    if (filesStatusArray) {
+      let temp = filesStatusArray.filter((val) => {
+        return val.uid !== fileStatus.uid;
+      });
+      setFilesStatusArray([...temp]);
     }
-    if(onRemove){
-      onRemove(fileStatus)
+    if (onRemove) {
+      onRemove(fileStatus);
     }
-  }
-  const handleDragger=(files:FileList)=>{
-    handleFileSelect(files)
-
-  }
+  };
+  const handleDragger = (files: FileList) => {
+    handleFileSelect(files);
+  };
   return (
     <>
       <div onClick={handleClick} className="upload-child">
-        {drag?<Dragger onFile={handleDragger}></Dragger>:children}
+        {drag ? <Dragger onFile={handleDragger}></Dragger> : children}
       </div>
       <input
         type={"file"}
         style={{ display: "none" }}
         ref={inputNode}
-        onChange={(e :React.ChangeEvent<HTMLInputElement>)=>handleFileSelect(e.target.files as FileList)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          handleFileSelect(e.target.files as FileList)
+        }
         accept={accept}
         multiple={multiple}
       ></input>
-      <FileList defaultFile={defaultFiles} onRemove={handleRemove} filesStatusArray={filesStatusArray}/>
+      <FileList
+        defaultFile={defaultFiles}
+        onRemove={handleRemove}
+        filesStatusArray={filesStatusArray}
+      />
     </>
   );
 };
 Upload.defaultProps = {
   onBeforeUpload: undefined,
+  drag:false
 };
 export default Upload;

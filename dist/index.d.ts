@@ -1,3 +1,4 @@
+import "./rem";
 export { default as Button } from "./components/button";
 export { default as Alert } from "./components/alert";
 export { default as AutoComplete } from "./components/autoComplete";
